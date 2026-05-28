@@ -4,8 +4,8 @@
 
 ---
 
-## 🇻🇳 Bản Tiếng Việt
-## 📌 Tổng Quan (Overview)
+## Bản Tiếng Việt
+## Tổng Quan (Overview)
 Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2023**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ.
 
 Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) quá lỏng lẻo ở phía backend.
@@ -25,7 +25,7 @@ Thay vì chỉ tin tưởng vào các giới hạn hiển thị trên giao diệ
 
 ---
 
-## 🔍 Phân Tích Kỹ Thuật (Technical Analysis)
+## Phân Tích Kỹ Thuật (Technical Analysis)
 
 ### Thành phần bị ảnh hưởng (Affected Component)
 * **Endpoint:** `/Schedule/ActivityStudent.aspx/GetStudent`
@@ -49,10 +49,9 @@ Tuy nhiên, khi thực hiện truy vấn với một cụm ký tự tìm kiếm 
 ```
 ---
 
-## 🇬🇧 English Version
-# Case Study: Excessive Data Exposure (CWE-213) in Academic Portal Architecture
+## English Version
 
-## 📌 Overview
+## Overview
 This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2023**) discovered within an enterprise academic portal environment. 
 
 The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to an over-permissive backend data projection model. 
@@ -72,7 +71,7 @@ Rather than relying on visual interface constraints, a low-level inspection of t
 
 ---
 
-## 🔍 Technical Analysis
+## Technical Analysis
 
 ### Affected Component
 * **Endpoint:** `/Schedule/ActivityStudent.aspx/GetStudent`
