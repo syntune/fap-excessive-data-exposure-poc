@@ -5,6 +5,9 @@
 # The disclosure report was promptly acknowledged by the administration:
 ![FAP Response Confirmation](fap_acknowledgement.png)
 
+# The old response given by the endpoint before the time of the patch (blurred):
+![Data Proof](proof.png)
+
 ---
 
 ## Bản Tiếng Việt
