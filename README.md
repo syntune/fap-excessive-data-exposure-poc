@@ -2,25 +2,25 @@
 
 [Đọc bản tiếng Việt tại đây](#bản-tiếng-việt) | [Read the English version below](#english-version)
 
-# The disclosure report was promptly acknowledged and escalated by the administration:
+# The disclosure report was promptly acknowledged by the administration:
 ![FAP Response Confirmation](fap_acknowledgement.png)
 
 ---
 
 ## Bản Tiếng Việt
 ## Tổng quan
-Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2019**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ. (https://fap.fpt.edu.vn/)
+Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2019**) được tìm thấy trong website cổng thông tin của trường Đại Học FPT. (https://fap.fpt.edu.vn/)
 
-Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) quá lỏng lẻo ở phía backend.
+Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) lỏng lẻo ở phía backend.
 
 > **Trạng thái:** Đã khắc phục và vá lỗi thành công trong vòng 2 giờ sau khi nhận báo cáo.
 
 ---
 
-## Ngữ cảnh và việc phát hiện
-Trong quá trình xây dựng một tính năng tối ưu cho dự án tiểu luận trên lớp (yêu cầu khả năng xác thực tự động mã số định danh sinh viên), tôi đã tiến hành phân tích hành vi của các endpoint thuộc hệ thống xếp lịch và đặt phòng nội bộ của nhà trường.
+## Việc phát hiện
+Trong quá trình tìm một tính năng tối ưu cho dự án phần mềm web trên lớp (yêu cầu khả năng xác thực mã số định danh sinh viên), tôi đã tiến hành phân tích hành vi của các endpoint thuộc hệ thống xếp lịch và đặt phòng nội bộ của nhà trường.
 
-Thay vì chỉ tin tưởng vào các giới hạn hiển thị trên giao diện người dùng (UI Constraints), việc kiểm tra chuyên sâu ở lớp mạng (Network Layer) cho thấy API phía backend đang truyền tải các gói tin dữ liệu (payload) quá dư thừa, chứa nhiều trường thông tin hoàn toàn không cần thiết cho tầng hiển thị.
+Thay vì chỉ tin tưởng vào các giới hạn hiển thị trên giao diện người dùng, việc kiểm tra chuyên sâu ở lớp mạng cho thấy API phía backend đang truyền tải các gói tin dữ liệu dư thừa, chứa nhiều trường thông tin hoàn toàn không cần thiết cho tầng hiển thị.
 
 * **Phát hiện & Phân tích:** Tháng 5, 2026
 * **Gửi báo cáo lỗ hổng:** Tháng 5, 2026
@@ -34,7 +34,7 @@ Thay vì chỉ tin tưởng vào các giới hạn hiển thị trên giao diệ
 * **Endpoint:** `/Schedule/ActivityStudent.aspx/GetStudent`
 * **HTTP Method:** `POST`
 * **Kiến trúc Backend:** ASP.NET (Enterprise Layered Architecture)
-* **Lớp dữ liệu lộ lọt:** `AP.BLL.ScheduleUtility+Item` (Data Transfer Object thuộc tầng Business Logic)
+* **Lớp dữ liệu lộ lọt:** `AP.BLL.ScheduleUtility+Item`
 
 ### Cơ chế hoạt động của lỗ hổng
 Về mặt tính năng, cấu phần giao diện dropdown ở phía client-side chỉ cần một thuộc tính dạng chuỗi cơ bản để hoạt động: mã số định danh (`RollNumber`). Giao diện sẽ trả lại tên của sinh viên tìm được một cách bình thường.
@@ -65,9 +65,9 @@ Tuy nhiên, endpoint backend lại trả về một tập hợp dữ liệu đư
 ## English Version
 
 ## Overview
-This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2019**) discovered within an enterprise academic portal environment. (https://fap.fpt.edu.vn/)
+This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2019**) discovered within FPT University's Academic Portal website. (https://fap.fpt.edu.vn/)
 
-The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to an over-permissive backend data projection model. 
+The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to a permissive backend data projection model. 
 
 > **Status:** Successfully fixed and patched within 2 hours after the report.
 
@@ -90,12 +90,12 @@ Rather than relying on visual interface constraints, a low-level inspection of t
 * **Endpoint:** `/Schedule/ActivityStudent.aspx/GetStudent`
 * **HTTP Method:** `POST`
 * **Backend Architecture:** ASP.NET (Enterprise Layered Architecture)
-* **Exposed Layer:** `AP.BLL.ScheduleUtility+Item` (Business Logic Layer Data Transfer Object)
+* **Exposed Layer:** `AP.BLL.ScheduleUtility+Item`
 
 ### The vulnerability mechanics
-The client-side UI dropdown component only required two basic string attributes to function: a unique student identifier (`RollNumber`) and a display name (`FullName`). 
+The client-side UI dropdown component only required two basic string attributes to function: a unique student identifier (`RollNumber`). The UI would return the found name of the student as usual.
 
-However, when querying a partial string fragment, the backend endpoint returned a serialized collection of internal data structures. The application failed to apply a proper data projection or sanitization filter, resulting in the leakage of hidden metadata attributes. This includes the information of school faulty and staffs - the endpoint could return up to 49 results:
+However, the backend endpoint returned a serialized collection of internal data structures. The application failed to apply a proper data projection or sanitization filter, resulting in the leakage of hidden metadata attributes. This includes the information of school faulty and staffs - the endpoint could return up to 49 results:
 
 ```json
 {
