@@ -10,11 +10,11 @@ Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và t
 
 Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) quá lỏng lẻo ở phía backend.
 
-> **Trạng thái:** Đã được nhà phát triển khắc phục và vá lỗi thành công trong vòng 48 giờ sau khi nhận báo cáo.
+> **Trạng thái:** Đã khắc phục và vá lỗi thành công trong vòng 2 giờ sau khi nhận báo cáo.
 
 ---
 
-## 🛠️ Ngữ cảnh & Trực giác phát hiện (Context & Discovery)
+## Ngữ cảnh & Trực giác phát hiện (Context & Discovery)
 Trong quá trình xây dựng một tính năng tối ưu cho dự án tiểu luận trên lớp (yêu cầu khả năng xác thực tự động mã số định danh sinh viên), tôi đã tiến hành phân tích hành vi của các endpoint thuộc hệ thống xếp lịch và đặt phòng nội bộ của nhà trường.
 
 Thay vì chỉ tin tưởng vào các giới hạn hiển thị trên giao diện người dùng (UI Constraints), việc kiểm tra chuyên sâu ở lớp mạng (Network Layer) cho thấy API phía backend đang truyền tải các gói tin dữ liệu (payload) quá dư thừa, chứa nhiều trường thông tin hoàn toàn không cần thiết cho tầng hiển thị.
@@ -40,11 +40,14 @@ Tuy nhiên, khi thực hiện truy vấn với một cụm ký tự tìm kiếm 
 
 ```json
 {
-  "__type": "AP.BLL.ScheduleUtility+Item",
-  "RollNumber": "HEXXXXXX",
-  "FullName": "Nguyen Van A",
-  "Email": "anvhexXXXXXX@fpt.edu.vn", 
-  "System_Identifier": "Ad_API_HN"
+    "d": [
+        {
+            "__type": "AP.BLL.ScheduleUtility+Item",
+            "RollNumber": "HEXXXXXX",
+            "FullName": "Nguyễn Văn A",
+            "Email": nguyenvana@gmail.com
+        }
+    ]
 }
 ```
 ---
@@ -56,11 +59,11 @@ This repository documents the identification, analysis, and responsible disclosu
 
 The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to an over-permissive backend data projection model. 
 
-> **Status:** Successfully Mitigated / Patched by Vendor within 48 hours of disclosure.
+> **Status:** Successfully fixed and patched within 2 hours after the report.
 
 ---
 
-## 🛠️ Context & Discovery Timeline
+## Context & Discovery Timeline
 While architecting a utility for a university class project that required automated student identifier validation, I investigated the behavior of the portal's internal scheduling and room-booking endpoints. 
 
 Rather than relying on visual interface constraints, a low-level inspection of the application's network layer revealed that the underlying backend API was transferring bloated data payloads containing fields strictly unnecessary for the presentation layer.
@@ -86,10 +89,13 @@ However, when querying a partial string fragment, the backend endpoint returned 
 
 ```json
 {
-  "__type": "AP.BLL.ScheduleUtility+Item",
-  "RollNumber": "HEXXXXXX",
-  "FullName": "John Doe",
-  "Email": "johndoe@institution.edu", 
-  "System_Identifier": "Ad_API_HN"
+    "d": [
+        {
+            "__type": "AP.BLL.ScheduleUtility+Item",
+            "RollNumber": "HEXXXXXX",
+            "FullName": "John Doe",
+            "Email": johndoe@gmail.com
+        }
+    ]
 }
 ```
