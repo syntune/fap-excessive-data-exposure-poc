@@ -8,5 +8,6 @@ async function checkStudent(id) {
     console.table(data.d, ["RollNumber", "FullName", "Email"]);
 }
 
-// Just type this and hit enter whenever you want to check an ID!
-checkStudent('HE204488');
+// The script is entered via the console and it will output the results found in the database
+// NOTE: The vulnerability has been patched and this script is meant for demonstration purposes.
+checkStudent('HEXXXXXX');
