@@ -6,7 +6,7 @@
 
 ## Bản Tiếng Việt
 ## Tổng Quan (Overview)
-Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2023**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ.
+Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2023**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ. (https://fap.fpt.edu.vn/)
 
 Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) quá lỏng lẻo ở phía backend.
 
@@ -52,7 +52,7 @@ Tuy nhiên, khi thực hiện truy vấn với một cụm ký tự tìm kiếm 
 ## English Version
 
 ## Overview
-This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2023**) discovered within an enterprise academic portal environment. 
+This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2023**) discovered within an enterprise academic portal environment. (https://fap.fpt.edu.vn/)
 
 The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to an over-permissive backend data projection model. 
 
