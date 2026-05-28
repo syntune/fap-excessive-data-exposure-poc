@@ -1,13 +1,16 @@
 # Case Study: Excessive Data Exposure (CWE-213) in Academic Portal Architecture
 
 [Đọc bản tiếng Việt tại đây](#bản-tiếng-việt) | [Read the English version below](#english-version)
+
+Báo cáo đã được tiếp nhận và xử lý nhanh chóng bởi ban quản lý:
+The disclosure report was promptly acknowledged and escalated by the administration:
 ![FAP Response Confirmation](fap_acknowledgement.png)
 
 ---
 
 ## Bản Tiếng Việt
 ## Tổng quan
-Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2023**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ. (https://fap.fpt.edu.vn/)
+Kho lưu trữ này tài liệu hóa quá trình phát hiện, phân tích và thực hiện báo cáo lỗ hổng **Lộ lọt dữ liệu (Excessive Data Exposure - CWE-213)** (tương ứng với tiêu chuẩn danh mục **OWASP API3:2019**) được tìm thấy trong kiến trúc cổng thông tin học thuật nội bộ. (https://fap.fpt.edu.vn/)
 
 Lỗ hổng này cho phép người dùng đã xác thực hệ thống có thể thu thập các cấu trúc dữ liệu nhạy cảm chưa được ẩn danh — bao gồm địa chỉ email người dùng và các mã định danh tích hợp hệ thống nội bộ — xuất phát từ việc thiết lập mô hình chiếu dữ liệu (data projection) quá lỏng lẻo ở phía backend.
 
@@ -63,7 +66,7 @@ Tuy nhiên, endpoint backend lại trả về một tập hợp dữ liệu đư
 ## English Version
 
 ## Overview
-This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2023**) discovered within an enterprise academic portal environment. (https://fap.fpt.edu.vn/)
+This repository documents the identification, analysis, and responsible disclosure of an **Excessive Data Exposure** vulnerability (corresponding to **OWASP API3:2019**) discovered within an enterprise academic portal environment. (https://fap.fpt.edu.vn/)
 
 The flaw allowed authenticated users to harvest sensitive, unredacted data structures—including user email addresses and internal system integration identifiers—due to an over-permissive backend data projection model. 
 
@@ -93,7 +96,7 @@ Rather than relying on visual interface constraints, a low-level inspection of t
 ### The vulnerability mechanics
 The client-side UI dropdown component only required two basic string attributes to function: a unique student identifier (`RollNumber`) and a display name (`FullName`). 
 
-However, when querying a partial string fragment, the backend endpoint returned a serialized collection of internal data structures. The application failed to apply a proper data projection or sanitization filter, resulting in the leakage of hidden metadata attributes:
+However, when querying a partial string fragment, the backend endpoint returned a serialized collection of internal data structures. The application failed to apply a proper data projection or sanitization filter, resulting in the leakage of hidden metadata attributes. This includes the information of school faulty and staffs - the endpoint could return up to 49 results:
 
 ```json
 {
@@ -103,7 +106,13 @@ However, when querying a partial string fragment, the backend endpoint returned 
             "RollNumber": "HEXXXXXX",
             "FullName": "John Doe",
             "Email": johndoe@gmail.com
-        }
+        },
+        {
+            "__type": "AP.BLL.ScheduleUtility+Item",
+            "RollNumber": "HEXXXXXX",
+            "FullName": "Jane Doe",
+            "Email": janedoe@gmail.com
+        },
     ]
 }
 ```
