@@ -2,8 +2,7 @@
 
 [Đọc bản tiếng Việt tại đây](#bản-tiếng-việt) | [Read the English version below](#english-version)
 
-Báo cáo đã được tiếp nhận và xử lý nhanh chóng bởi ban quản lý:
-The disclosure report was promptly acknowledged and escalated by the administration:
+# The disclosure report was promptly acknowledged and escalated by the administration:
 ![FAP Response Confirmation](fap_acknowledgement.png)
 
 ---
